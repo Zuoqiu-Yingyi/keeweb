@@ -1,3 +1,4 @@
+@use "sass:color";
 @font-face {
     font-family: 'Font Awesome 5 Free';
     font-style: normal;
@@ -29,7 +30,7 @@ $fa-glyph-counter: 61440; // 0xf000
 
     $lo-part: $fa-glyph-counter % 256;
     $hi-part: ($fa-glyph-counter - $lo-part) / 256;
-    $hex-num-str: str-slice(#{rgb($hi-part, $lo-part, 1)}, 2, 5);
+    $hex-num-str: str-slice(#{color.change(#000000, $red: $hi-part, $green: $lo-part)}, 2, 5);
 
     $glyph: unquote('"\\#{$hex-num-str}"');
 

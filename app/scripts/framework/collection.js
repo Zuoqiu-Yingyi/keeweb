@@ -72,7 +72,7 @@ const ProxyDef = {
 class Collection {
     constructor(items) {
         const emitter = new EventEmitter();
-        emitter.setMaxListeners(100);
+        emitter.setMaxListeners?.(100);
 
         const properties = {
             [SymbolEvents]: { value: emitter },

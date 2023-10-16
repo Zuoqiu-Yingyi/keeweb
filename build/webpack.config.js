@@ -47,6 +47,7 @@ function config(options) {
                 path.join(rootDir, 'node_modules')
             ],
             alias: {
+                events: 'eventemitter3',
                 'babel-helpers': path.join(rootDir, 'app/lib/babel-helpers.js'),
                 jquery: `jquery/dist/jquery${devMode ? '' : '.min'}.js`,
                 morphdom: `morphdom/dist/morphdom-umd${devMode ? '' : '.min'}.js`,
@@ -219,7 +220,9 @@ function config(options) {
                 $: 'jquery',
                 babelHelpers: 'babel-helpers'
             }),
-            new webpack.IgnorePlugin(/^(moment)$/),
+            new webpack.IgnorePlugin({
+                resourceRegExp: /^(moment)$/,
+            }),
             new MiniCssExtractPlugin({
                 filename: 'css/[name].css'
             })
@@ -229,12 +232,13 @@ function config(options) {
             __dirname: false
         },
         externals: {
+            '@xmldom/xmldom': 'null',
             xmldom: 'null',
             crypto: 'null',
             fs: 'null',
             path: 'null'
         },
-        devtool: devMode ? 'source-map' : undefined
+        devtool: devMode ? 'inline-source-map' : undefined
     };
 }
 

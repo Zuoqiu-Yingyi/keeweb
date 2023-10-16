@@ -45,6 +45,7 @@ module.exports = function (grunt) {
     grunt.log.writeln(`Building KeeWeb v${pkg.version} (${sha})`);
 
     const webpackOptions = {
+        // mode: 'development',
         date,
         beta: !!grunt.option('beta'),
         sha,
@@ -89,7 +90,10 @@ module.exports = function (grunt) {
     grunt.initConfig({
         noop: { noop: {} },
         clean: {
-            dist: ['dist', 'tmp'],
+            dist: [
+                'dist/index.html',
+                'tmp',
+            ],
             desktop: ['tmp/desktop', 'dist/desktop']
         },
         copy: {
