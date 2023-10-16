@@ -37,7 +37,7 @@ class View extends EventEmitter {
         this.model = model;
         this.options = options;
 
-        this.setMaxListeners(100);
+        this.setMaxListeners?.(100);
     }
 
     render(templateData) {

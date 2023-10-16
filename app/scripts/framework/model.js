@@ -54,7 +54,7 @@ const ProxyDef = {
 class Model {
     constructor(data) {
         const emitter = new EventEmitter();
-        emitter.setMaxListeners(100);
+        emitter.setMaxListeners?.(100);
 
         const properties = {
             [SymbolEvents]: { value: emitter }
