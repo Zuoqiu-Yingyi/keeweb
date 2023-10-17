@@ -3,7 +3,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build-web-app', [
         'clean',
-        // 'eslint',
+        'eslint',
         'copy:html',
         'copy:icons',
         'copy:manifest',
@@ -16,6 +16,29 @@ module.exports = function (grunt) {
         'string-replace:update-manifest',
         'copy:dist-icons',
         'copy:dist-manifest'
+    ]);
+
+    grunt.registerTask('build-web-app-dev', [
+        'clean',
+        // 'eslint',
+        'copy:html',
+        'copy:icons',
+        'copy:manifest',
+        'webpack:app',
+        'inline',
+        'htmlmin',
+
+        // 'csp-hashes',
+        'copy:dist-html',
+        'copy:dist-js-map',
+
+        'copy:content-dist',
+        'string-replace:service-worker',
+        'string-replace:update-manifest',
+        'copy:dist-icons',
+        'copy:dist-manifest',
+
+        'copy:dist',
     ]);
 
     grunt.registerTask('build-desktop-app-content', [

@@ -1,3 +1,5 @@
+import { PLUGIN_BASE_URL } from './siyuan';
+
 const Links = {
     Homepage: 'https://keeweb.info',
     Repo: 'https://github.com/keeweb/keeweb',
@@ -15,7 +17,8 @@ const Links = {
     AutoTypeMacOS: 'https://github.com/keeweb/keeweb/wiki/Auto-Type#macos',
     Translation: 'https://keeweb.oneskyapp.com/',
     Donation: 'https://opencollective.com/keeweb#support',
-    Plugins: 'https://plugins.keeweb.info',
+    // Plugins: 'https://plugins.keeweb.info',
+    Plugins: PLUGIN_BASE_URL,
     PluginDevelopStart: 'https://github.com/keeweb/keeweb/wiki/Plugins',
     YubiKeyManual: 'https://github.com/keeweb/keeweb/wiki/YubiKey',
     YubiKeyManagerInstall: 'https://github.com/Yubico/yubikey-manager#installation',

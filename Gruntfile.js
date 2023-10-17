@@ -45,10 +45,13 @@ module.exports = function (grunt) {
     grunt.log.writeln(`Building KeeWeb v${pkg.version} (${sha})`);
 
     const webpackOptions = {
-        // mode: 'development',
+        mode: !!grunt.option('dev')
+            ? 'development'
+            : 'production',
         date,
         beta: !!grunt.option('beta'),
         sha,
+        // sha: 'dev',
         appleTeamId: '3LE7JZ657W'
     };
 
@@ -91,7 +94,7 @@ module.exports = function (grunt) {
         noop: { noop: {} },
         clean: {
             dist: [
-                'dist/index.html',
+                'dist',
                 'tmp',
             ],
             desktop: ['tmp/desktop', 'dist/desktop']
@@ -100,6 +103,23 @@ module.exports = function (grunt) {
             html: {
                 src: 'app/index.html',
                 dest: 'tmp/index.html',
+                nonull: true
+            },
+            'dist-html': {
+                src: 'tmp/app.html',
+                dest: 'dist/index.html',
+                nonull: true
+            },
+            'dist-js-map': {
+                src: 'tmp/js/app.js.map',
+                dest: 'dist/app.js.map',
+                nonull: false
+            },
+            dist: {
+                cwd: './dist/',
+                src: '**',
+                dest: './../siyuan-packages-monorepo/workspace/plugins/keepass/public/keeweb/app/',
+                expand: true,
                 nonull: true
             },
             'content-dist': {

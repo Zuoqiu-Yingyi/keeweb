@@ -2,6 +2,7 @@ import * as kdbxweb from 'kdbxweb';
 import { Logger } from 'util/logger';
 import publicKeyData from 'public-key.pem';
 import publicKeyDataNew from 'public-key-new.pem';
+import publicKeyDataCustom from 'public-key-custom.pem';
 
 const SignatureVerifier = {
     logger: new Logger('signature-verifier'),
@@ -63,7 +64,7 @@ const SignatureVerifier = {
 
     getPublicKeys() {
         if (!this.publicKeys) {
-            this.publicKeys = [publicKeyData, publicKeyDataNew].map((pk) =>
+            this.publicKeys = [publicKeyData, publicKeyDataNew, publicKeyDataCustom].map((pk) =>
                 pk.match(/-+BEGIN PUBLIC KEY-+([\s\S]+?)-+END PUBLIC KEY-+/)[1].replace(/\s+/g, '')
             );
         }

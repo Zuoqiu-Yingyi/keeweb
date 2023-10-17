@@ -7,6 +7,7 @@ import { PluginGallery } from 'plugins/plugin-gallery';
 import { SignatureVerifier } from 'util/data/signature-verifier';
 import { Logger } from 'util/logger';
 import { noop } from 'util/fn';
+import { LOCAL_STORAGE_KEYS } from 'const/siyuan';
 
 const logger = new Logger('plugin-mgr');
 
@@ -21,7 +22,7 @@ class PluginManager extends Model {
 
     init() {
         const ts = logger.ts();
-        return SettingsStore.load('plugins').then((state) => {
+        return SettingsStore.load(LOCAL_STORAGE_KEYS.plugins).then((state) => {
             if (!state) {
                 return;
             }
@@ -201,7 +202,7 @@ class PluginManager extends Model {
     }
 
     saveState() {
-        SettingsStore.save('plugins', {
+        SettingsStore.save(LOCAL_STORAGE_KEYS.plugins, {
             autoUpdateAppVersion: this.autoUpdateAppVersion,
             autoUpdateDate: this.autoUpdateDate,
             plugins: this.plugins.map((plugin) => ({

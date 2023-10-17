@@ -1,6 +1,7 @@
 import { Model } from 'framework/model';
 import { SettingsStore } from 'comp/settings/settings-store';
 import { DefaultAppSettings } from 'const/default-app-settings';
+import { LOCAL_STORAGE_KEYS } from 'const/siyuan';
 
 class AppSettingsModel extends Model {
     constructor() {
@@ -9,7 +10,7 @@ class AppSettingsModel extends Model {
     }
 
     load() {
-        return SettingsStore.load('app-settings').then((data) => {
+        return SettingsStore.load(LOCAL_STORAGE_KEYS.app_settings).then((data) => {
             if (data) {
                 this.upgrade(data);
                 this.set(data, { silent: true });
@@ -39,7 +40,7 @@ class AppSettingsModel extends Model {
                 values[key] = value;
             }
         }
-        SettingsStore.save('app-settings', values);
+        SettingsStore.save(LOCAL_STORAGE_KEYS.app_settings, values);
     }
 }
 

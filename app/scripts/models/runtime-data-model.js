@@ -1,5 +1,6 @@
 import { Model } from 'framework/model';
 import { SettingsStore } from 'comp/settings/settings-store';
+import { LOCAL_STORAGE_KEYS } from 'const/siyuan';
 
 class RuntimeDataModel extends Model {
     constructor() {
@@ -8,7 +9,7 @@ class RuntimeDataModel extends Model {
     }
 
     load() {
-        return SettingsStore.load('runtime-data').then((data) => {
+        return SettingsStore.load(LOCAL_STORAGE_KEYS.runtime_data).then((data) => {
             if (data) {
                 this.set(data, { silent: true });
             }
@@ -16,7 +17,7 @@ class RuntimeDataModel extends Model {
     }
 
     save() {
-        SettingsStore.save('runtime-data', this);
+        SettingsStore.save(LOCAL_STORAGE_KEYS.runtime_data, this);
     }
 }
 

@@ -4,6 +4,7 @@ import { SettingsStore } from 'comp/settings/settings-store';
 import { Links } from 'const/links';
 import { SignatureVerifier } from 'util/data/signature-verifier';
 import { Logger } from 'util/logger';
+import { LOCAL_STORAGE_KEYS } from 'const/siyuan';
 
 const PluginGallery = {
     logger: new Logger('plugin-gallery'),
@@ -81,7 +82,7 @@ const PluginGallery = {
 
     getCachedGallery() {
         const ts = this.logger.ts();
-        return SettingsStore.load('plugin-gallery').then((data) => {
+        return SettingsStore.load(LOCAL_STORAGE_KEYS.plugin_gallery).then((data) => {
             if (data) {
                 return this.verifySignature(data).then((gallery) => {
                     this.logger.debug(`Loaded cached plugin gallery`, this.logger.ts(ts));
@@ -92,7 +93,7 @@ const PluginGallery = {
     },
 
     saveGallery(data) {
-        SettingsStore.save('plugin-gallery', data);
+        SettingsStore.save(LOCAL_STORAGE_KEYS.plugin_gallery, data);
     }
 };
 
