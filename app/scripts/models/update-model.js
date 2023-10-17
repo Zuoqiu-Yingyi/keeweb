@@ -1,9 +1,10 @@
 import { Model } from 'framework/model';
 import { SettingsStore } from 'comp/settings/settings-store';
+import { LOCAL_STORAGE_KEYS } from 'const/siyuan';
 
 class UpdateModel extends Model {
     load() {
-        return SettingsStore.load('update-info').then((data) => {
+        return SettingsStore.load(LOCAL_STORAGE_KEYS.update_info).then((data) => {
             if (data) {
                 try {
                     for (const [key, val] of Object.entries(data)) {
@@ -26,7 +27,7 @@ class UpdateModel extends Model {
                 delete attr[key];
             }
         }
-        SettingsStore.save('update-info', attr);
+        SettingsStore.save(LOCAL_STORAGE_KEYS.update_info, attr);
     }
 }
 

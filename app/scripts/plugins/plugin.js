@@ -11,6 +11,7 @@ import { IoCache } from 'storage/io-cache';
 import { SemVer } from 'util/data/semver';
 import { SignatureVerifier } from 'util/data/signature-verifier';
 import { Logger } from 'util/logger';
+import { redirectPluginURL } from 'const/siyuan';
 
 const commonLogger = new Logger('plugin');
 const io = new IoCache({
@@ -207,7 +208,7 @@ class Plugin extends Model {
             });
         } else {
             const url = this.url + this.getResourcePath(type) + '?v=' + manifest.version;
-            res = httpGet(url, true);
+            res = httpGet(redirectPluginURL(url), true);
         }
         return res.then((data) => {
             this.logger.debug('Resource data loaded', type, this.logger.ts(ts));
@@ -643,7 +644,7 @@ class Plugin extends Model {
         }
         commonLogger.info('Installing plugin from url', url);
         const manifestUrl = url + 'manifest.json';
-        return httpGet(manifestUrl)
+        return httpGet(redirectPluginURL(manifestUrl))
             .catch((e) => {
                 commonLogger.error('Error loading plugin manifest', e);
                 throw 'Error loading plugin manifest';

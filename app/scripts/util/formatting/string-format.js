@@ -1,5 +1,5 @@
 const StringFormat = {
-    camelCaseRegex: /-./g,
+    camelCaseRegex: /-+./g,
 
     capFirst(str) {
         if (!str) {

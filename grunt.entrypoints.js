@@ -5,6 +5,10 @@ module.exports = function(grunt) {
         'build-web-app'
     ]);
 
+    grunt.registerTask('build', 'Build: build web app (dev)', [
+        'build-web-app-dev'
+    ]);
+
     grunt.registerTask('dev', 'Build project and start web server and watcher', [
         'build-web-app',
         'devsrv'

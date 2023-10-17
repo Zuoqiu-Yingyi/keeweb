@@ -63,6 +63,7 @@ function config(options) {
                 templates: path.join(rootDir, 'app/templates'),
                 'public-key.pem': path.join(rootDir, 'app/resources/public-key.pem'),
                 'public-key-new.pem': path.join(rootDir, 'app/resources/public-key-new.pem'),
+                'public-key-custom.pem': path.join(rootDir, 'app/resources/public-key-custom.pem'),
                 'demo.kdbx': path.join(rootDir, 'app/resources/Demo.kdbx'),
                 'fontawesome.woff2': '@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2'
             },
@@ -184,6 +185,7 @@ function config(options) {
         optimization: {
             runtimeChunk: false,
             minimize: !devMode,
+            // minimize: false,
             minimizer: [
                 new TerserPlugin({
                     extractComments: 'never-extract-comments',
@@ -238,7 +240,7 @@ function config(options) {
             fs: 'null',
             path: 'null'
         },
-        devtool: devMode ? 'inline-source-map' : undefined
+        devtool: devMode ? 'source-map' : undefined
     };
 }
 

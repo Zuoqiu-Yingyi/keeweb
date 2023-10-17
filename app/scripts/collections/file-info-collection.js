@@ -1,12 +1,13 @@
 import { Collection } from 'framework/collection';
 import { SettingsStore } from 'comp/settings/settings-store';
 import { FileInfoModel } from 'models/file-info-model';
+import { LOCAL_STORAGE_KEYS } from 'const/siyuan';
 
 class FileInfoCollection extends Collection {
     static model = FileInfoModel;
 
     load() {
-        return SettingsStore.load('file-info').then((data) => {
+        return SettingsStore.load(LOCAL_STORAGE_KEYS.file_info).then((data) => {
             if (data) {
                 for (const item of data) {
                     this.push(new FileInfoModel(item));
@@ -16,7 +17,7 @@ class FileInfoCollection extends Collection {
     }
 
     save() {
-        SettingsStore.save('file-info', this);
+        SettingsStore.save(LOCAL_STORAGE_KEYS.file_info, this);
     }
 
     getMatch(storage, name, path) {
