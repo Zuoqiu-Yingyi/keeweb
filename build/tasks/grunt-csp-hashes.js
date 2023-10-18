@@ -2,7 +2,7 @@ module.exports = function (grunt) {
     grunt.registerMultiTask('csp-hashes', 'Adds CSP hashes for inline JS and CSS', function () {
         const opt = this.options();
         for (const file of this.files) {
-            const html = grunt.file.read(file.src[0], { encoding: null });
+            const html = grunt.file.read(file.src[0], { encoding: 'utf-8' }).replaceAll("\r", "");
             const { algo } = opt;
 
             const crypto = require('crypto');
@@ -24,10 +24,10 @@ module.exports = function (grunt) {
 
                         const hasher = crypto.createHash(algo);
                         hasher.update(slice);
-                        const digest = hasher.digest('base64');
+                        const digest = hasher.digest();
 
                         hashes[type] = hashes[type] || [];
-                        hashes[type].push(digest);
+                        hashes[type].push(digest.toString('base64'));
                     }
                 }
             }
@@ -39,14 +39,14 @@ module.exports = function (grunt) {
                 }
             }
 
-            let htmlStr = html.toString('latin1');
+            let htmlStr = html;
             for (const [type, digests] of Object.entries(hashes)) {
-                const cspIndex = htmlStr.indexOf(`${type}-src 'self'`);
+                const cspIndex = htmlStr.indexOf(`${type}-src 'unsafe-inline'`);
                 if (cspIndex < 0) {
                     grunt.warn(`Not found: ${type}-src`);
                 }
                 const digestsList = digests.map((digest) => `'${algo}-${digest}'`).join(' ');
-                htmlStr = htmlStr.replace(`${type}-src 'self'`, `${type}-src ${digestsList}`);
+                htmlStr = htmlStr.replace(`${type}-src 'unsafe-inline'`, `${type}-src ${digestsList}`);
             }
 
             grunt.log.writeln(
@@ -56,7 +56,7 @@ module.exports = function (grunt) {
                     .join(', ')
             );
 
-            grunt.file.write(file.dest, Buffer.from(htmlStr, 'latin1'));
+            grunt.file.write(file.dest, Buffer.from(htmlStr, 'utf-8'));
         }
     });
 };
