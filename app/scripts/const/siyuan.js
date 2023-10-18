@@ -59,3 +59,18 @@ export const LOCAL_STORAGE_KEYS = (() => {
 
     return keys;
 })();
+
+/* indexedDB 数据库名 */
+export const DEFAULT_INDEXED_DB_MANES = {
+    files_cache: 'files-cache',
+    plugin_files: 'plugin-files',
+};
+export const INDEXED_DB_MANES = (() => {
+    const keys = {};
+
+    for (const [key, value] of Object.entries(DEFAULT_INDEXED_DB_MANES)) {
+        keys[key] = StringFormat.pascalCase(value);
+    }
+
+    return keys;
+})();

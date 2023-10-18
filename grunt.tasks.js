@@ -26,11 +26,11 @@ module.exports = function (grunt) {
         'copy:manifest',
         'webpack:app',
         'inline',
-        'htmlmin',
 
-        // 'csp-hashes',
-        'copy:dist-html',
-        'copy:dist-js-map',
+        // 'htmlmin', // 会造成意外的换行
+        'string-replace:style-tag', // 👈 避免出现 <style > 导致无法生成 CSP 摘要
+        'csp-hashes',
+        'copy:dist-js-map', // 👈
 
         'copy:content-dist',
         'string-replace:service-worker',
@@ -38,7 +38,7 @@ module.exports = function (grunt) {
         'copy:dist-icons',
         'copy:dist-manifest',
 
-        'copy:dist',
+        'copy:dist', // 👈
     ]);
 
     grunt.registerTask('build-desktop-app-content', [

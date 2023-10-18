@@ -1,5 +1,6 @@
 import { IoBrowserCache } from 'storage/io-browser-cache';
 import { StorageBase } from 'storage/storage-base';
+import { INDEXED_DB_MANES } from 'const/siyuan';
 
 class StorageCache extends StorageBase {
     name = 'cache';
@@ -11,7 +12,7 @@ class StorageCache extends StorageBase {
     init() {
         super.init();
         this.io = new IoBrowserCache({
-            cacheName: 'FilesCache',
+            cacheName: INDEXED_DB_MANES.files_cache,
             logger: this.logger
         });
     }

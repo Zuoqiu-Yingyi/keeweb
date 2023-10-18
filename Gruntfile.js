@@ -105,11 +105,6 @@ module.exports = function (grunt) {
                 dest: 'tmp/index.html',
                 nonull: true
             },
-            'dist-html': {
-                src: 'tmp/app.html',
-                dest: 'dist/index.html',
-                nonull: true
-            },
             'dist-js-map': {
                 src: 'tmp/js/app.js.map',
                 dest: 'dist/app.js.map',
@@ -333,6 +328,23 @@ module.exports = function (grunt) {
             }
         },
         'string-replace': {
+            "style-tag": {
+                options: {
+                    replacements: [
+                        {
+                            pattern: /<style\s+>/,
+                            replacement: "<style>",
+                        },
+                        {
+                            pattern: /<script\s+>/,
+                            replacement: "<script>",
+                        },
+                    ],
+                },
+                files: {
+                    'tmp/app.html': 'tmp/app.html',
+                },
+            },
             'update-manifest': {
                 options: {
                     replacements: [
