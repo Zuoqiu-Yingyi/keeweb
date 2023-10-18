@@ -12,10 +12,11 @@ import { SemVer } from 'util/data/semver';
 import { SignatureVerifier } from 'util/data/signature-verifier';
 import { Logger } from 'util/logger';
 import { redirectPluginURL } from 'const/siyuan';
+import { INDEXED_DB_MANES } from 'const/siyuan';
 
 const commonLogger = new Logger('plugin');
 const io = new IoCache({
-    cacheName: 'PluginFiles',
+    cacheName: INDEXED_DB_MANES.plugin_files,
     logger: new Logger('storage-plugin-files')
 });
 
