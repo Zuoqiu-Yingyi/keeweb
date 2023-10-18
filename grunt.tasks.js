@@ -28,7 +28,7 @@ module.exports = function (grunt) {
         'inline',
 
         // 'htmlmin', // 会造成意外的换行
-        'string-replace:style-tag', // 👈 避免出现 <style > 导致无法生成 CSP 摘要
+        'string-replace:format', // 👈 避免出现 <style > 导致无法生成 CSP 摘要, 避免 \r\n 导致摘要不一致
         'csp-hashes',
         'copy:dist-js-map', // 👈
 

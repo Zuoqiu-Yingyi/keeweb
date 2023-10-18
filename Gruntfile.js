@@ -328,7 +328,7 @@ module.exports = function (grunt) {
             }
         },
         'string-replace': {
-            "style-tag": {
+            format: {
                 options: {
                     replacements: [
                         {
