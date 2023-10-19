@@ -29,6 +29,7 @@ import { AppView } from 'views/app-view';
 import 'hbs-helpers';
 import { AutoType } from './auto-type';
 import { Storage } from './storage';
+import { FLAG_SIYUAN_IFRAME } from 'const/siyuan';
 
 StartProfiler.milestone('loading modules');
 
@@ -54,7 +55,7 @@ ready(() => {
         });
 
     function ensureCanRun() {
-        if (Features.isFrame && !appModel.settings.allowIframes) {
+        if (Features.isFrame && !appModel.settings.allowIframes && !FLAG_SIYUAN_IFRAME) {
             return Promise.reject(
                 'Running in iframe is not allowed (this can be changed in the app config).'
             );
@@ -154,7 +155,7 @@ ready(() => {
             const skipHttpsWarning =
                 localStorage.skipHttpsWarning || appModel.settings.skipHttpsWarning;
             const protocolIsInsecure = ['https:', 'file:', 'app:'].indexOf(location.protocol) < 0;
-            const hostIsInsecure = location.hostname !== 'localhost';
+            const hostIsInsecure = !['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
             if (protocolIsInsecure && hostIsInsecure && !skipHttpsWarning) {
                 return new Promise((resolve) => {
                     Alerts.error({

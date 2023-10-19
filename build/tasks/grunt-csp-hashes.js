@@ -2,7 +2,7 @@ module.exports = function (grunt) {
     grunt.registerMultiTask('csp-hashes', 'Adds CSP hashes for inline JS and CSS', function () {
         const opt = this.options();
         for (const file of this.files) {
-            const html = grunt.file.read(file.src[0], { encoding: 'utf-8' }).replaceAll("\r", "");
+            const html = grunt.file.read(file.src[0], { encoding: 'utf-8' }).replaceAll("\r\n", "\n");
             const { algo } = opt;
 
             const crypto = require('crypto');
@@ -12,12 +12,15 @@ module.exports = function (grunt) {
             for (const type of ['style', 'script']) {
                 let index = 0;
                 while (index >= 0) {
-                    index = html.indexOf(`><${type}>`, index);
+                    const tagStart = `<${type} integrity>`;
+                    const tagEnd = `</${type}>`;
+
+                    index = html.indexOf(tagStart, index);
                     if (index > 0) {
-                        index += `><${type}>`.length;
-                        const endIndex = html.indexOf(`</${type}>`, index);
+                        index += tagStart.length;
+                        const endIndex = html.indexOf(tagEnd, index);
                         if (endIndex < 0) {
-                            grunt.warn(`Not found: </${type}>`);
+                            grunt.warn(`Not found: ${tagEnd}`);
                         }
                         const slice = html.slice(index, endIndex);
                         index = endIndex;

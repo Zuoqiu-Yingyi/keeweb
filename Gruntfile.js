@@ -298,6 +298,12 @@ module.exports = function (grunt) {
             installer: ['package/osx/installer.js']
         },
         inline: {
+            options: {
+                inlineTagAttributes: {
+                    js: "integrity",
+                    css: "integrity",
+                },
+            },
             app: {
                 src: 'tmp/index.html',
                 dest: 'tmp/app.html'
@@ -332,12 +338,12 @@ module.exports = function (grunt) {
                 options: {
                     replacements: [
                         {
-                            pattern: /<style\s+>/,
-                            replacement: "<style>",
+                            pattern: /<style\s+integrity\s+>/,
+                            replacement: "<style integrity>",
                         },
                         {
-                            pattern: /<script\s+>/,
-                            replacement: "<script>",
+                            pattern: /<script\s+integrity\s+>/,
+                            replacement: "<script integrity>",
                         },
                     ],
                 },

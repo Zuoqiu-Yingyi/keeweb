@@ -28,9 +28,9 @@ module.exports = function (grunt) {
         'inline',
 
         // 'htmlmin', // 会造成意外的换行
-        'string-replace:format', // 👈 避免出现 <style > 导致无法生成 CSP 摘要, 避免 \r\n 导致摘要不一致
+        'string-replace:format', // 👈 避免标签出现意外的空格 <style csp-hash> 导致无法生成 CSP 摘要
         'csp-hashes',
-        'copy:dist-js-map', // 👈
+        'copy:dist-js-map', // 👈 复制 js.map 到 dist 目录
 
         'copy:content-dist',
         'string-replace:service-worker',
@@ -38,7 +38,7 @@ module.exports = function (grunt) {
         'copy:dist-icons',
         'copy:dist-manifest',
 
-        'copy:dist', // 👈
+        'copy:dist', // 👈 复制 dist 目录到其他项目
     ]);
 
     grunt.registerTask('build-desktop-app-content', [
