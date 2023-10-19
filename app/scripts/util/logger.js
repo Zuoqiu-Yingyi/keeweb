@@ -1,3 +1,5 @@
+import { FLAG_SIYUAN_IFRAME } from 'const/siyuan';
+
 const Level = {
     Off: 0,
     Error: 1,
@@ -11,7 +13,7 @@ const MaxLogsToSave = 100;
 
 const lastLogs = [];
 
-const Logger = function (name, id, level = Level.All) {
+const Logger = function (name, id, level = FLAG_SIYUAN_IFRAME ? Level.Warn : Level.All) {
     this.prefix = name ? name + (id ? ':' + id : '') : 'default';
     this.level = level;
 };

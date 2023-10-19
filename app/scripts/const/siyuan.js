@@ -27,6 +27,9 @@ export function redirectPluginURL(url) {
 
 /* 是否为思源环境 */
 export const FLAG_SIYUAN = isSiyuan();
+export const FLAG_SIYUAN_IFRAME = FLAG_SIYUAN
+    && globalThis.top !== globalThis
+    && !!globalThis.parent.siyuan;
 
 /* 插件加载 URL */
 export const DEFAULT_PLUGIN_BASE_URL = 'https://plugins.keeweb.info';
@@ -40,7 +43,7 @@ export const DEFAULT_LOCAL_STORAGE_KEYS = {
     file_info: 'file-info',
     plugin_gallery: 'plugin-gallery',
     plugins: 'plugins',
-    runtime_data : 'runtime-data',
+    runtime_data: 'runtime-data',
     update_info: 'update-info',
 };
 export const LOCAL_STORAGE_KEYS = (() => {

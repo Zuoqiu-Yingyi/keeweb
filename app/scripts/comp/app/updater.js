@@ -9,6 +9,7 @@ import { UpdateModel } from 'models/update-model';
 import { SemVer } from 'util/data/semver';
 import { Logger } from 'util/logger';
 import { SignatureVerifier } from 'util/data/signature-verifier';
+import { FLAG_SIYUAN } from 'const/siyuan';
 
 const logger = new Logger('updater');
 
@@ -40,9 +41,11 @@ const Updater = {
 
     init() {
         this.scheduleNextCheck();
-        if (!Launcher && navigator.serviceWorker && !RuntimeInfo.beta && !RuntimeInfo.devMode) {
+        if (!Launcher && navigator.serviceWorker && !RuntimeInfo.beta && (!RuntimeInfo.devMode || FLAG_SIYUAN)) {
             navigator.serviceWorker
-                .register('service-worker.js')
+                .register(`service-worker.js?v=${RuntimeInfo.version}`, {
+                    scope: './',
+                })
                 .then((reg) => {
                     logger.info('Service worker registered');
                     reg.addEventListener('updatefound', () => {
