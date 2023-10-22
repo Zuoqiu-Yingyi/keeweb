@@ -63,6 +63,7 @@ class OpenView extends View {
     busy = false;
     currentSelectedIndex = -1;
     encryptedPassword = null;
+    pathStack = [];
 
     constructor(model) {
         super(model);
@@ -785,6 +786,7 @@ class OpenView extends View {
         if (storage.needShowOpenConfig && storage.needShowOpenConfig()) {
             this.showConfig(storage);
         } else if (storage.list) {
+            this.pathStack.length = 0;
             this.listStorage(storage);
         } else {
             Alerts.notImplemented();
@@ -841,9 +843,14 @@ class OpenView extends View {
             const listView = new StorageFileListView({ files });
             listView.on('selected', (file) => {
                 if (file.dir) {
+                    if (file.name === '..') {
+                        this.pathStack.pop();
+                    } else {
+                        this.pathStack.push(file.path);
+                    }
                     this.listStorage(storage, {
                         dir: file.path,
-                        prevDir: (config && config.dir) || ''
+                        prevDir: this.pathStack.at(-2) || ''
                     });
                 } else {
                     this.openStorageFile(storage, file);
