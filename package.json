@@ -122,8 +122,8 @@
     "dev-desktop-linux": "grunt dev-desktop-linux --skip-sign",
     "babel-helpers": "babel-external-helpers -l 'slicedToArray,toConsumableArray,defineProperty,typeof' -t global > app/lib/babel-helpers.js",
     "set-legacy": "export NODE_OPTIONS=--openssl-legacy-provider",
-    "build": "grunt build",
-    "build:dev": "grunt build --dev"
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider grunt build",
+    "build:dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider grunt build --dev"
   },
   "author": {
     "name": "Antelle",
