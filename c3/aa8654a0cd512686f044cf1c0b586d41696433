@@ -1,0 +1,22 @@
+app/scripts/views/storage-file-list-view.js
+  s_e2cb8fff8286b8::t_d946e3c13cdd63 17-18,27,31-33
+app/scripts/views/open-view.js
+  s_e2cb8fff8286b8::t_2bda709a1f2a3a 122,394-395,422-423
+  s_e2cb8fff8286b8::t_26dc12e104c5db 424-433
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.35-trip",
+  "base_commit_sha": "c3aa8654a0cd512686f044cf1c0b586d41696433",
+  "prompts": {},
+  "sessions": {
+    "s_e2cb8fff8286b8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f8a58-1759-7561-ad9c-6bddc390f21c",
+        "model": "gpt-5.5-2026-04-24"
+      },
+      "human_author": "Yingyi / 颖逸 <49649786+Zuoqiu-Yingyi@users.noreply.github.com>"
+    }
+  }
+}
