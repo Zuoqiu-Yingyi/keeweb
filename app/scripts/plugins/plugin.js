@@ -11,8 +11,7 @@ import { IoCache } from 'storage/io-cache';
 import { SemVer } from 'util/data/semver';
 import { SignatureVerifier } from 'util/data/signature-verifier';
 import { Logger } from 'util/logger';
-import { redirectPluginURL } from 'const/siyuan';
-import { INDEXED_DB_MANES } from 'const/siyuan';
+import { redirectPluginURL, INDEXED_DB_MANES } from 'const/siyuan';
 
 const commonLogger = new Logger('plugin');
 const io = new IoCache({
