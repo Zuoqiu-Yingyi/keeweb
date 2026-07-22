@@ -372,7 +372,7 @@ class Plugin extends Model {
                     require: PluginApi.require,
                     module: this.module
                 };
-                text = `(function(require, module){${text}})(window["${jsVar}"].require,window["${jsVar}"].module);`;
+                text = `(function(require, module){\n${text}\n})(window["${jsVar}"].require,window["${jsVar}"].module);`;
                 const ts = this.logger.ts();
 
                 // Note that here we're calling eval to run the plugin code,

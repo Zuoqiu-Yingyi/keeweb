@@ -221,7 +221,27 @@
                     display: none;
                 }
             }
+            &-siyuan {
+                visibility: hidden;
+                margin-left: 0.3em;
+                &:hover {
+                    .open--file & {
+                        visibility: visible;
+                    }
+                }
+            }
+            &-siyuan {
+                .open--key-file,
+                .open--opening & {
+                    display: none;
+                }
+            }
             &:hover .open__settings-key-file-dropbox {
+                .open--file & {
+                    visibility: visible;
+                }
+            }
+            &:hover .open__settings-key-file-siyuan {
                 .open--file & {
                     visibility: visible;
                 }
@@ -235,6 +255,16 @@
 
         &-key-file,
         &-key-file-dropbox {
+            color: var(--muted-color);
+            &:hover {
+                .open--file:not(.open--opening) & {
+                    color: var(--medium-color);
+                }
+            }
+        }
+
+        &-key-file,
+        &-key-file-siyuan {
             color: var(--muted-color);
             &:hover {
                 .open--file:not(.open--opening) & {

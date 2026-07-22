@@ -14,7 +14,8 @@ class StorageFileListView extends View {
     constructor(model) {
         super(model);
         this.allStorageFiles = {};
-        this.showHiddenFiles = false;
+        this.showAllFiles = !!model.showAllFiles;
+        this.showHiddenFiles = this.showAllFiles;
     }
 
     render() {
@@ -23,12 +24,13 @@ class StorageFileListView extends View {
             return {
                 path: file.path,
                 name: file.name.replace(/\.kdbx$/i, ''),
-                kdbx: UrlFormat.isKdbx(file.name),
+                kdbx: !!file.kdbx || UrlFormat.isKdbx(file.name),
                 dir: file.dir
             };
         });
-        const visibleFiles = files.filter((f) => f.dir || f.kdbx);
-        const canShowHiddenFiles = visibleFiles.length && files.length > visibleFiles.length;
+        const visibleFiles = this.showAllFiles ? files : files.filter((f) => f.dir || f.kdbx);
+        const canShowHiddenFiles =
+            !this.showAllFiles && visibleFiles.length && files.length > visibleFiles.length;
         if (!this.showHiddenFiles) {
             if (visibleFiles.length > 0) {
                 files = visibleFiles;

@@ -97,6 +97,7 @@
                 <i class="fa fa-key open__settings-key-file-icon">
                 </i><span class="open__settings-key-file-name">{{res 'openKeyFile'}}</span>
                 {{#if canOpenKeyFromDropbox}}<span class="open__settings-key-file-dropbox"> {{res 'openKeyFileDropbox'}}</span>{{/if}}
+                {{#if canOpenKeyFromSiyuan}}<span class="open__settings-key-file-siyuan"> {{res 'openKeyFileSiyuan'}}</span>{{/if}}
             </div>
             <div class="open__settings-yubikey {{#if canUseChalRespYubiKey}}open__settings-yubikey--present{{/if}} hide"
                  tabindex="26" title="YubiKey">

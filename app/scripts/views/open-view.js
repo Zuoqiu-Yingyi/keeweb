@@ -119,6 +119,7 @@ class OpenView extends View {
         super.render({
             lastOpenFiles: this.getLastOpenFiles(),
             canOpenKeyFromDropbox: !Launcher && Storage.dropbox.enabled,
+            canOpenKeyFromSiyuan: !Launcher && Storage.siyuan?.enabled,
             demoOpened: this.model.settings.demoOpened,
             storageProviders,
             unlockMessageRes: this.model.unlockMessageRes,
@@ -390,6 +391,8 @@ class OpenView extends View {
     openKeyFile(e) {
         if ($(e.target).hasClass('open__settings-key-file-dropbox')) {
             this.openKeyFileFromDropbox();
+        } else if ($(e.target).hasClass('open__settings-key-file-siyuan')) {
+            this.openKeyFileFromSiyuan();
         } else if (!this.busy && this.params.name) {
             if (this.params.keyFileName) {
                 this.params.keyFileData = null;
@@ -413,6 +416,21 @@ class OpenView extends View {
                 this.params.keyFileName = res.name;
                 this.displayOpenKeyFile();
             }).choose();
+        }
+    }
+
+    openKeyFileFromSiyuan() {
+        if (!this.busy) {
+            Storage.siyuan
+                ?.SiyuanChooser((err, res) => {
+                    if (err) {
+                        return;
+                    }
+                    this.params.keyFileData = res.data;
+                    this.params.keyFileName = res.name;
+                    this.displayOpenKeyFile();
+                })
+                .choose();
         }
     }
 
